@@ -59,27 +59,29 @@ class UI {
 
 
 //to store data after page reload, we will use local storage. To handle local storage, we will create class store
-class Store {
-        static getbooks() {
-            let books;
-            if
-                (localStorage.getItem('books') === null) { books = []; }
-            else {
-                books = JSON.parse(localStorage.getItem('books'));
-                //if there is any thing as "books", we will call it as JS obj by using JSON.parse
-            }
-            return books;
-        }//this function will check local storage if there is any book....if there is no book, it will return ar empty array; if not it will return the array
-    static addBook(book) {
-        let books = Store.getBooks();
-        //it will call it's own class's function to check if there is any book...we will push new books in "return books"(!?)
-        books.push(book);
-        localStorage.setItem('books', 
-        JSON.stringify(books));
-        book.preventDefault();
-    }
-    //we will add books...it will recieve the added book as a parameter
-}//getbooks will be informed if there is any book in local storage already
+// class Store {
+//         static getbooks() {
+//             let books;
+//             if
+//                 (localStorage.getItem('books') === null) { books = []; }
+//             else {
+//                 books = JSON.parse(localStorage.getItem('books'));
+//                 //if there is any thing as "books", we will call it as JS obj by using JSON.parse
+//             }
+//             return books;
+//         }
+        //this function will check local storage if there is any book....if there is no book, it will return ar empty array; if not it will return the array
+    // static addBook(book) {
+    //     let books = Store.getBooks();
+    //     //it will call it's own class's function to check if there is any book...we will push new books in "return books"(!?)
+    //     books.push(book);
+    //     localStorage.setItem('books', 
+    //     JSON.stringify(books));
+    //     book.preventDefault();
+    // }
+//     we will add books...it will recieve the added book as a parameter
+// }
+//getbooks will be informed if there is any book in local storage already
 
 
 fom.addEventListener('submit', newbook);
@@ -102,7 +104,7 @@ function newbook(e) {
         UI.clearfields();
         UI.showalert
             ("Book added to the list!", "success");
-        Store.addBook(book);
+        // Store.addBook(book);
     }
 
 
