@@ -31,6 +31,9 @@ class UI {
     static deletefrombook(target) {
         if (target.hasAttribute('href')) {
             target.parentElement.parentElement.remove();
+            Store.removeBook(target.parentElement.previousElementSibling.textContent.trim());
+            //as <td>${book.isbn}</td>
+///* <td><a href='#' class='remub'>X</a></td>` *///trim() to cutoff unnecessary space value
             UI.showalert
                 ('Book have been removed!', 'success')
             //alert will be seen after book removal
@@ -78,7 +81,22 @@ books=JSON.parse(localStorage.getItem('books'));
         // book.preventDefault();
     }
 //     we will add books...it will recieve the added book as a parameter
+
+static displayBooks()
+{let books=Store.getBooks();
+books.forEach(book=>
+{UI.addtobooklist(book);} )};
+
+static removeBook(isbn)
+{let books=Store.getBooks();
+books.forEach((book,index)=>
+{if (book.isbn===isbn)
+    {books.splice(index,1);}})
+localStorage.setItem('books',JSON.stringify(books));}
+
 }
+document.addEventListener('DOMContentLoaded',
+Store.displayBooks());
 //getbooks will be informed if there is any book in local storage already
 
 
