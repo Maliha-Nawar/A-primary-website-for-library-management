@@ -33,7 +33,7 @@ class UI {
             target.parentElement.parentElement.remove();
             Store.removeBook(target.parentElement.previousElementSibling.textContent.trim());
             //as <td>${book.isbn}</td>
-///* <td><a href='#' class='remub'>X</a></td>` *///trim() to cutoff unnecessary space value
+            ///* <td><a href='#' class='remub'>X</a></td>` *///trim() to cutoff unnecessary space value
             UI.showalert
                 ('Book have been removed!', 'success')
             //alert will be seen after book removal
@@ -60,43 +60,43 @@ class UI {
 
 //to store data after page reload, we will use local storage. To handle local storage, we will create class store
 class Store {
-        static getBooks() {
-            let books;
-            if
-    (localStorage.getItem('books') === null) 
-    { books = []; }
-            else {
-books=JSON.parse(localStorage.getItem('books'));
-//                 //if there is any thing as "books", we will call it as JS obj by using JSON.parse
-            }
-            return books;
+    static getBooks() {
+        let books;
+        if
+            (localStorage.getItem('books') === null) { books = []; }
+        else {
+            books = JSON.parse(localStorage.getItem('books'));
+            //                 //if there is any thing as "books", we will call it as JS obj by using JSON.parse
         }
-        //this function will check local storage if there is any book....if there is no book, it will return ar empty array; if not it will return the array
+        return books;
+    }
+    //this function will check local storage if there is any book....if there is no book, it will return ar empty array; if not it will return the array
     static addBook(book) {
         let books = Store.getBooks();
-    //     //it will call it's own class's function to check if there is any book...we will push new books in "return books"(!?)
+        //     //it will call it's own class's function to check if there is any book...we will push new books in "return books"(!?)
         books.push(book);
-        localStorage.setItem('books', 
-        JSON.stringify(books));
+        localStorage.setItem('books',
+            JSON.stringify(books));
         // book.preventDefault();
     }
-//     we will add books...it will recieve the added book as a parameter
+    //     we will add books...it will recieve the added book as a parameter
 
-static displayBooks()
-{let books=Store.getBooks();
-books.forEach(book=>
-{UI.addtobooklist(book);} )};
+    static displayBooks() {
+        let books = Store.getBooks();
+        books.forEach(book => { UI.addtobooklist(book); })
+    };
 
-static removeBook(isbn)
-{let books=Store.getBooks();
-books.forEach((book,index)=>
-{if (book.isbn===isbn)
-    {books.splice(index,1);}})
-localStorage.setItem('books',JSON.stringify(books));}
+    static removeBook(isbn) {
+        let books = Store.getBooks();
+        books.forEach((book, index) => {
+            if (book.isbn === isbn) { books.splice(index, 1); }
+        })
+        localStorage.setItem('books', JSON.stringify(books));
+    }
 
 }
 document.addEventListener('DOMContentLoaded',
-Store.displayBooks());
+    Store.displayBooks());
 //getbooks will be informed if there is any book in local storage already
 
 
