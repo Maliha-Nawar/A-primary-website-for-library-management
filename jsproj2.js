@@ -1,10 +1,11 @@
 let fom = document.querySelector('.fom'),
     booklist = document.querySelector('.tbody');
 class Book {
-    constructor(name, by, isbn) {
+    constructor(name, by, isbn,time) {
         this.name = name;
         this.by = by;
         this.isbn = isbn;
+        this.time=time;
     }
 }
 
@@ -62,10 +63,12 @@ class UI {
 class Store {
     static getBooks() {
         let books;
+      
         if
             (localStorage.getItem('books') === null) { books = []; }
         else {
             books = JSON.parse(localStorage.getItem('books'));
+            
             //                 //if there is any thing as "books", we will call it as JS obj by using JSON.parse
         }
         return books;
@@ -77,6 +80,7 @@ class Store {
         books.push(book);
         localStorage.setItem('books',
             JSON.stringify(books));
+        
         // book.preventDefault();
     }
     //     we will add books...it will recieve the added book as a parameter
@@ -108,6 +112,7 @@ function newbook(e) {
     let name = document.querySelector('.name').value,
         by = document.querySelector('.by').value,
         isbn = document.querySelector('.isbn').value;
+        time = `${new Date()}`;
     if (name === '' || by === '' || isbn === '') {
         UI.showalert
             ("Please fill up all fields!", "error");
@@ -115,7 +120,7 @@ function newbook(e) {
 
     else {
         let book = new Book
-            (name, by, isbn);
+            (name, by, isbn, time);
         UI.addtobooklist(book);
         UI.clearfields();
         UI.showalert
